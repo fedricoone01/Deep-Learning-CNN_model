@@ -8,7 +8,6 @@ Created on Tue Jun  7 12:03:31 2022
 import os
 import matplotlib.pyplot as plt
 from tensorflow.python.keras import backend as K
-import tensorflow as tf
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dropout, Flatten, Dense
 from tensorflow.python.keras.layers import  Convolution2D, MaxPooling2D
@@ -32,7 +31,7 @@ filter_size1 = (3, 3)
 filter_size2 = (2, 2)
 pool_size = (2, 2)
 classes = 2
-lr = 0.0008
+
 
 # Pre-processing our images
 training_datagen = ImageDataGenerator(
@@ -65,12 +64,12 @@ cnn.add(MaxPooling2D(pool_size=pool_size))
 
 cnn.add(Flatten())
 cnn.add(Dense(256, activation='relu'))
-cnn.add(Dropout(0.3))
+cnn.add(Dropout(0.2))
 cnn.add(Dense(classes, activation='sigmoid')) 
 
 # Compile model
 cnn.compile(loss='binary_crossentropy',
-        optimizer="adadelta",
+        optimizer="adam",
         metrics=['accuracy'])
 
 # Train the model
